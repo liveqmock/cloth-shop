@@ -1,0 +1,129 @@
+html {
+	font-size: 10px;
+}
+
+body {
+	padding: 0;
+	font-family: PingFang-SC-Regular, Heiti, Heiti SC, DroidSans, DroidSansFallback, Arial, "Microsoft YaHei";
+	color: black;
+	position: relative;
+	height: 100%;
+	max-width: 640px;
+	margin: auto;
+}
+
+* {
+	max-width: 640px!important;
+}
+img {
+	width: 100%;
+}
+
+@media screen and (min-width: 320px) {
+	html {
+		font-size: 10px;
+	}
+}
+
+@media screen and (min-width: 375px) {
+	html {
+		font-size: 10px;
+	}
+}
+
+@media screen and (min-width: 414px) {
+	html {
+		font-size: 10px;
+	}
+}
+
+input {
+	border: none;
+	outline: medium
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+span,
+a {
+	margin: 0;
+	padding: 0;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+fieldset,
+img,
+iframe {
+	border: 0;
+}
+
+:focus {
+	outline: 0;
+}
+
+i,
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+	font-style: normal;
+}
+
+ol,
+ul,li {
+	list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: 100%;
+	font-weight: normal;
+}
+
+/*清楚a标签默认样式*/
+
+a,
+a:hover,
+a:valid,
+a:visited,
+a:active,
+a:invalid {
+	text-decoration: none;
+	color: black;
+}
