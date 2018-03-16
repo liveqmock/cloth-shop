@@ -153,17 +153,17 @@ export default {
 		show(flag) { //切换登录,注册,忘记密码
 			this.tab = flag
 		},
-		async getUserInfo(){
+		async getUserInfo() {
 			//获取个人信息
-			let resUserInfo = await this.$http.get(this.$store.state.domain + '/user/index', {
+			let res = await this.$http.get(this.$store.state.domain + '/user/index', {
 				params: {
 					key: window.localStorage.access_token,
 				}
 			})
-			console.log(resUserInfo.data)
+			console.log(res.data)
 
 			//获取失败返回并提示
-			if (resUserInfo.data.code != 200) {
+			if (res.data.code != 200) {
 				this.$store.dispatch({
 					type: 'toast',
 					message: res.data.msg,
@@ -219,162 +219,124 @@ export default {
 
 			this.getUserInfo();
 		},
-		register() {
-			this.$http({ //注册
-					url: this.$store.state.domain + '/user/registor',
-					method: 'GET',
-					params: {
-						phone: this.phone,
-						password: this.register_password,
-						code: this.register_code,
-						sign: this.sign,
-					},
+		async register() {
+			let res = await this.$http({ //注册
+				url: this.$store.state.domain + '/user/registor',
+				method: 'GET',
+				params: {
+					phone: this.phone,
+					password: this.register_password,
+					code: this.register_code,
+					sign: this.sign,
+				},
+			})
+			console.log(res.data)
+			if (res.data.code != '200') {
+				this.$store.dispatch('toast', {
+					message: res.data.msg,
+					icon: '2'
 				})
-				.then(res => {
-					console.log(res.data)
-					if (res.data.code == '200') {
-						window.localStorage.access_token = res.data.key
-						this.$store.dispatch('toast', {
-							message: res.data.msg,
-							icon: '1'
-						})
-						this.$http({
-								url: this.$store.state.domain + '/user/index',
-								method: 'GET',
-								params: {
-									key: window.localStorage.access_token,
-								}
-							})
-							.then(res => {
-								console.log(res.data)
-								if (res.data.code == '200') {
-									window.localStorage.user_info = JSON.stringify(res.data)
-									setTimeout(() => {
-										if (this.$route.query.redirect != undefined) {
-											window.history.pushState({
-												name: 'test'
-											}, 'title:test', '/home')
-											this.$router.push({
-												path: this.$route.query.redirect
-											})
-										} else {
-											this.$router.push({
-												path: '/home'
-											})
-										}
-									}, 1000)
-								} else {
-									this.$store.dispatch('toast', {
-										message: res.data.msg,
-										icon: '2'
-									})
-								}
-							})
-					} else {
-						this.$store.dispatch('toast', {
-							message: res.data.msg,
-							icon: '2'
-						})
-					}
-				})
+				return 0;
+			}
+			window.localStorage.access_token = res.data.key
+			this.$store.dispatch('toast', {
+				message: res.data.msg,
+				icon: '1'
+			})
+			this.getUserInfo();
 		},
-		forget() {
-			this.$http({ //忘记密码
-					url: this.$store.state.domain + '/user/forget',
-					method: 'GET',
-					params: {
-						phone: this.phone,
-						code: this.forget_code,
-						password: this.forget_password
-					}
-				})
-				.then(res => {
-					console.log(res.data)
+		async forget() {
+			let res = await this.$http({ //忘记密码
+				url: this.$store.state.domain + '/user/forget',
+				method: 'GET',
+				params: {
+					phone: this.phone,
+					code: this.forget_code,
+					password: this.forget_password
+				}
+			})
+			console.log(res.data)
 
-					if (res.data.code == '200') {
-						this.$store.dispatch('toast', {
-							message: res.data.msg,
-							icon: '1'
-						})
-						setTimeout(() => {
-							this.tab = 'login'
-						}, this.$store.state.toast_duration)
-					} else {
-						this.$store.dispatch('toast', {
-							message: res.data.msg,
-							icon: '2'
-						})
-					}
+			if (res.data.code == '200') {
+				this.$store.dispatch('toast', {
+					message: res.data.msg,
+					icon: '1'
 				})
-		},
-		get_forget_code() { //获取忘记密码验证码
-			if (this.forget_code_flag == 1) {
-				this.forget_code_flag = 2
-				this.$http({
-						url: this.$store.state.domain + '/api/send_code',
-						method: 'GET',
-						params: {
-							phone: this.phone,
-							type: 'forget'
-						}
-					})
-					.then(res => {
-						console.log(res.data)
-						if (res.data.code == '200') {
-							this.$store.dispatch('toast', {
-								message: res.data.msg,
-								icon: '1'
-							})
-							this.forget_code_flag = 3
-							this.forget_code_interval = setInterval(() => {
-								this.forget_code_time--;
-								if (this.forget_code_time < 0) {
-									this.forget_code_flag = 1
-									this.forget_code_time = 60
-									clearInterval(this.forget_code_interval)
-								}
-							}, 1000)
-						} else {
-							this.$store.dispatch('toast', {
-								message: res.data.msg,
-								icon: '2'
-							})
-							this.forget_code_flag = 1
-						}
-					})
+				setTimeout(() => {
+					this.tab = 'login'
+				}, this.$store.state.toast_duration)
+			} else {
+				this.$store.dispatch('toast', {
+					message: res.data.msg,
+					icon: '2'
+				})
 			}
 		},
-		get_register_code() { //获取注册验证码
+		async get_forget_code() { //获取忘记密码验证码
+			if (this.forget_code_flag == 1) {
+				this.forget_code_flag = 2
+				let res = await this.$http({
+					url: this.$store.state.domain + '/api/send_code',
+					method: 'GET',
+					params: {
+						phone: this.phone,
+						type: 'forget'
+					}
+				})
+				console.log(res.data)
+				if (res.data.code == '200') {
+					this.$store.dispatch('toast', {
+						message: res.data.msg,
+						icon: '1'
+					})
+					this.forget_code_flag = 3
+					this.forget_code_interval = setInterval(() => {
+						this.forget_code_time--;
+						if (this.forget_code_time < 0) {
+							this.forget_code_flag = 1
+							this.forget_code_time = 60
+							clearInterval(this.forget_code_interval)
+						}
+					}, 1000)
+				} else {
+					this.$store.dispatch('toast', {
+						message: res.data.msg,
+						icon: '2'
+					})
+					this.forget_code_flag = 1
+				}
+			}
+		},
+		async get_register_code() { //获取注册验证码
 			if (this.register_code_flag == 1) {
 				this.register_code_flag = 2
-				this.$http({
-						url: this.$store.state.domain + '/api/send_code',
-						method: 'GET',
-						params: {
-							phone: this.phone,
-							type: 'registor'
-						}
-					})
-					.then(res => {
-						console.log(res.data)
-						if (res.data.code == '200') {
-							this.register_code_flag = 3
-							this.register_code_interval = setInterval(() => {
-								this.register_code_time--;
-								if (this.register_code_time < 0) {
-									this.register_code_flag = 1
-									this.register_code_time = 60
-									clearInterval(this.register_code_interval)
-								}
-							}, 1000)
-						} else {
-							this.$store.dispatch('toast', {
-								message: res.data.msg,
-								icon: '2'
-							})
+				let res = await this.$http({
+					url: this.$store.state.domain + '/api/send_code',
+					method: 'GET',
+					params: {
+						phone: this.phone,
+						type: 'registor'
+					}
+				})
+
+				console.log(res.data)
+				if (res.data.code == '200') {
+					this.register_code_flag = 3
+					this.register_code_interval = setInterval(() => {
+						this.register_code_time--;
+						if (this.register_code_time < 0) {
 							this.register_code_flag = 1
+							this.register_code_time = 60
+							clearInterval(this.register_code_interval)
 						}
+					}, 1000)
+				} else {
+					this.$store.dispatch('toast', {
+						message: res.data.msg,
+						icon: '2'
 					})
+					this.register_code_flag = 1
+				}
 			}
 		},
 		wx() { // 微信登录，跳转到后台处理页面

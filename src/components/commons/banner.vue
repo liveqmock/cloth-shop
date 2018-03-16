@@ -98,12 +98,12 @@
 			background: #FF5555;
 		}
 	}
-	
+
 	.banner {
 		position: relative;
 		width: 100%;
 		overflow-x: hidden;
-		height: 43vw;
+		height: 48.8vw;
 		img {
 			position: absolute;
 			top: 0;
