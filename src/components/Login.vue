@@ -153,38 +153,15 @@ export default {
 		show(flag) { //切换登录,注册,忘记密码
 			this.tab = flag
 		},
-		async login() {
-			//登录验证 获取token
-			let res = await this.$http.get(this.$store.state.domain + '/user/login', {
-				params: {
-					phone: this.phone,
-					password: this.password,
-				}
-			})
-			console.log(res.data);
-			//登陆失败返回并提示
-			if (res.data.code != 200) {
-				this.$store.dispatch({
-					type: 'toast',
-					message: res.data.msg,
-					icon: '2'
-				})
-				return 0
-			}
-			//保存token
-			window.localStorage.access_token = res.data.key
-			this.$store.dispatch({
-				type: 'toast',
-				message: res.data.msg,
-				icon: '1'
-			})
-
+		async getUserInfo(){
+			//获取个人信息
 			let resUserInfo = await this.$http.get(this.$store.state.domain + '/user/index', {
 				params: {
 					key: window.localStorage.access_token,
 				}
 			})
 			console.log(resUserInfo.data)
+
 			//获取失败返回并提示
 			if (resUserInfo.data.code != 200) {
 				this.$store.dispatch({
@@ -213,6 +190,34 @@ export default {
 				})
 
 			}, 1000)
+		},
+		async login() {
+			//登录验证 获取token
+			let res = await this.$http.get(this.$store.state.domain + '/user/login', {
+				params: {
+					phone: this.phone,
+					password: this.password,
+				}
+			})
+			console.log(res.data);
+			//登陆失败返回并提示
+			if (res.data.code != 200) {
+				this.$store.dispatch({
+					type: 'toast',
+					message: res.data.msg,
+					icon: '2'
+				})
+				return 0
+			}
+			//保存token
+			window.localStorage.access_token = res.data.key
+			this.$store.dispatch({
+				type: 'toast',
+				message: res.data.msg,
+				icon: '1'
+			})
+
+			this.getUserInfo();
 		},
 		register() {
 			this.$http({ //注册
