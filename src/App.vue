@@ -2,7 +2,7 @@
 	<div id="app">
 		<toast></toast>
 		<!-- 过渡效果 -->
-		<zgAnimate :name="'fade'"> 
+		<zgAnimate :name="'fade'">
 			<!-- 缓存 -->
 			<keep-alive :include="$store.state.include">
 				<router-view></router-view>

@@ -74,313 +74,304 @@ const BrandStreet = r => require.ensure([], () => r(require('@/components/BrandS
 Vue.use(Router)
 
 const router = new Router({
-	mode: 'history',
-	//进入页面默认返回顶部
-	scrollBehavior(to, from, savedPosition) {
-		return {
-			x: 0,
-			y: 0
-		}
-	},
-	routes: [{
-		path: '/',
-		redirect: {
-			name: 'home'
-		}
-	}, {
-		path: '/home',
-		name: 'home',
-		component: Home,
-		meta: {
-			auth: true,
-			keep: true
-		}
-	}, {
-		path: '/single',
-		name: 'single',
-		component: Single,
-		meta: {
-			auth: true,
-			keep: true
-		}
-	}, {
-		path: '/shopCar',
-		name: 'shopCar',
-		component: ShopCar,
-		meta: {
-			auth: true,
-			keep: false
-		}
-	}, {
-		path: '/me',
-		name: 'me',
-		component: Me,
-		meta: {
-			auth: true,
-			keep: true
-		}
-	}, {
-		path: '/my/balance',
-		name: 'myBalance',
-		component: MyBalance,
-		meta: {
-			auth: true,
-			keep: true
-		}
-	}, {
-		path: '/my/brand',
-		name: 'myBrand',
-		component: MyBrand,
-		meta: {
-			auth: true,
-			keep: false
-		}
-	}, {
-		path: '/my/coupon',
-		name: 'myCoupon',
-		component: MyCoupon,
-		meta: {
-			auth: true,
-			keep: false
-		}
-	}, {
-		path: '/my/coupon/exchange',
-		name: 'myCouponExchange',
-		component: MyCouponExchange,
-		meta: {
-			auth: true,
-			keep: false
-		}
-	}, {
-		path: '/my/distribution',
-		name: 'myDistribution',
-		component: MyDistribution,
-		meta: {
-			auth: true,
-			keep: true
-		}
-	}, {
-		path: '/my/distribution/qrcode',
-		name: 'myDistributionQrcode',
-		component: MyDistributionQrcode,
-		meta: {
-			auth: true,
-			keep: true
-		}
-	}, {
-		path: '/my/distribution/stream',
-		name: 'myDistributionStream',
-		component: MyDistributionStream,
-		meta: {
-			auth: true,
-			keep: true
-		}
-	}, {
-		path: '/my/distribution/team',
-		name: 'myDistributionTeam',
-		component: MyDistributionTeam,
-		meta: {
-			auth: true,
-			keep: true
-		}
-	}, {
-		path: '/my/distribution/withdraw',
-		name: 'myDistributionWithdraw',
-		component: MyDistributionWithdraw,
-		meta: {
-			auth: true,
-			keep: false
-		}
-	}, {
-		path: '/my/love',
-		name: 'myLove',
-		component: MyLove,
-		meta: {
-			auth: true,
-			keep: false
-		}
-	}, {
-		path: '/my/message',
-		name: 'myMessage',
-		component: MyMessage,
-		meta: {
-			auth: true,
-			keep: true
-		}
-	}, {
-		path: '/my/address',
-		name: 'myAddress',
-		component: MyAddress,
-		meta: {
-			auth: true,
-			keep: true
-		}
-	}, {
-		path: '/my/address/add',
-		name: 'myAddressAdd',
-		component: MyAddressAdd,
-		meta: {
-			auth: true,
-			keep: true
-		}
-	}, {
-		path: '/my/point',
-		name: 'myPoint',
-		component: MyPoint,
-		meta: {
-			auth: true,
-			keep: true
-		}
-	}, {
-		path: '/my/order',
-		name: 'myOrder',
-		component: MyOrder,
-		meta: {
-			auth: true,
-			keep: false
-		}
-	}, {
-		path: '/my/setting',
-		name: 'mySetting',
-		component: MySetting,
-		meta: {
-			auth: true,
-			keep: true
-		}
-	}, {
-		path: '/sort',
-		name: 'sort',
-		component: Sort,
-		meta: {
-			auth: true,
-			keep: true
-		}
-	}, {
-		path: '/goodDetail',
-		name: 'goodDetail',
-		component: GoodDetail,
-		meta: {
-			auth: true,
-			keep: false
-		}
-	}, {
-		path: '/order',
-		name: 'order',
-		component: Order,
-		meta: {
-			auth: true,
-			keep: false
-		}
-	}, {
-		path: '/order/detail',
-		name: 'orderDetail',
-		component: OrderDetail,
-		meta: {
-			auth: true,
-			keep: false
-		}
-	}, {
-		path: '/order/comment',
-		name: 'orderComment',
-		component: OrderComment,
-		meta: {
-			auth: true,
-			keep: false
-		}
-	}, {
-		path: '/order/logistics',
-		name: 'orderLogistics',
-		component: OrderLogistics,
-		meta: {
-			auth: true,
-			keep: false
-		}
-	}, {
-		path: '/order/pay',
-		name: 'orderPay',
-		component: OrderPay,
-		meta: {
-			auth: true,
-			keep: false
-		}
-	}, {
-		path: '/order/pay/success',
-		name: 'orderPaySuccess',
-		component: OrderPaySuccess,
-		meta: {
-			auth: true,
-			keep: false
-		}
-	}, {
-		path: '/order/pay/fail',
-		name: 'orderPayFail',
-		component: OrderPayFail,
-		meta: {
-			auth: true,
-			keep: false
-		}
-	}, {
-		path: '/order/return',
-		name: 'orderReturn',
-		component: OrderReturn,
-		meta: {
-			auth: true,
-			keep: false
-		}
-	}, {
-		path: '/login',
-		name: 'login',
-		component: Login,
-		meta: {
-			auth: false
-		}
-	}, {
-		path: '/key',
-		name: 'key',
-		component: Key,
-		meta: {
-			auth: false
-		}
-	}, {
-		path: '/search',
-		name: 'search',
-		component: Search,
-		meta: {
-			auth: true,
-			keep: true
-		}
-	}, {
-		path: '/brandStreet',
-		name: 'brandStreet',
-		component: BrandStreet,
-		meta: {
-			auth: true,
-			keep: true
-		}
-	}, {
-		path: '*',
-		redirect: {
-			name: 'home'
-		}
-	}]
+  mode: 'history',
+  routes: [
+    {
+      path: '/',
+      redirect: {
+        name: 'home'
+      }
+    }, {
+      path: '/home',
+      name: 'home',
+      component: Home,
+      meta: {
+        auth: true,
+        keep: true,
+      }
+    }, {
+      path: '/single',
+      name: 'single',
+      component: Single,
+      meta: {
+        auth: true,
+        keep: true
+      }
+    }, {
+      path: '/shopCar',
+      name: 'shopCar',
+      component: ShopCar,
+      meta: {
+        auth: true,
+        keep: false
+      }
+    }, {
+      path: '/me',
+      name: 'me',
+      component: Me,
+      meta: {
+        auth: true,
+        keep: true
+      }
+    }, {
+      path: '/my/balance',
+      name: 'myBalance',
+      component: MyBalance,
+      meta: {
+        auth: true,
+        keep: true
+      }
+    }, {
+      path: '/my/brand',
+      name: 'myBrand',
+      component: MyBrand,
+      meta: {
+        auth: true,
+        keep: false
+      }
+    }, {
+      path: '/my/coupon',
+      name: 'myCoupon',
+      component: MyCoupon,
+      meta: {
+        auth: true,
+        keep: false
+      }
+    }, {
+      path: '/my/coupon/exchange',
+      name: 'myCouponExchange',
+      component: MyCouponExchange,
+      meta: {
+        auth: true,
+        keep: false
+      }
+    }, {
+      path: '/my/distribution',
+      name: 'myDistribution',
+      component: MyDistribution,
+      meta: {
+        auth: true,
+        keep: true
+      }
+    }, {
+      path: '/my/distribution/qrcode',
+      name: 'myDistributionQrcode',
+      component: MyDistributionQrcode,
+      meta: {
+        auth: true,
+        keep: true
+      }
+    }, {
+      path: '/my/distribution/stream',
+      name: 'myDistributionStream',
+      component: MyDistributionStream,
+      meta: {
+        auth: true,
+        keep: true
+      }
+    }, {
+      path: '/my/distribution/team',
+      name: 'myDistributionTeam',
+      component: MyDistributionTeam,
+      meta: {
+        auth: true,
+        keep: true
+      }
+    }, {
+      path: '/my/distribution/withdraw',
+      name: 'myDistributionWithdraw',
+      component: MyDistributionWithdraw,
+      meta: {
+        auth: true,
+        keep: false
+      }
+    }, {
+      path: '/my/love',
+      name: 'myLove',
+      component: MyLove,
+      meta: {
+        auth: true,
+        keep: false
+      }
+    }, {
+      path: '/my/message',
+      name: 'myMessage',
+      component: MyMessage,
+      meta: {
+        auth: true,
+        keep: true
+      }
+    }, {
+      path: '/my/address',
+      name: 'myAddress',
+      component: MyAddress,
+      meta: {
+        auth: true,
+        keep: true
+      }
+    }, {
+      path: '/my/address/add',
+      name: 'myAddressAdd',
+      component: MyAddressAdd,
+      meta: {
+        auth: true,
+        keep: true
+      }
+    }, {
+      path: '/my/point',
+      name: 'myPoint',
+      component: MyPoint,
+      meta: {
+        auth: true,
+        keep: true
+      }
+    }, {
+      path: '/my/order',
+      name: 'myOrder',
+      component: MyOrder,
+      meta: {
+        auth: true,
+        keep: false
+      }
+    }, {
+      path: '/my/setting',
+      name: 'mySetting',
+      component: MySetting,
+      meta: {
+        auth: true,
+        keep: true
+      }
+    }, {
+      path: '/sort',
+      name: 'sort',
+      component: Sort,
+      meta: {
+        auth: true,
+        keep: true
+      }
+    }, {
+      path: '/goodDetail',
+      name: 'goodDetail',
+      component: GoodDetail,
+      meta: {
+        auth: true,
+        keep: false
+      }
+    }, {
+      path: '/order',
+      name: 'order',
+      component: Order,
+      meta: {
+        auth: true,
+        keep: false
+      }
+    }, {
+      path: '/order/detail',
+      name: 'orderDetail',
+      component: OrderDetail,
+      meta: {
+        auth: true,
+        keep: false
+      }
+    }, {
+      path: '/order/comment',
+      name: 'orderComment',
+      component: OrderComment,
+      meta: {
+        auth: true,
+        keep: false
+      }
+    }, {
+      path: '/order/logistics',
+      name: 'orderLogistics',
+      component: OrderLogistics,
+      meta: {
+        auth: true,
+        keep: false
+      }
+    }, {
+      path: '/order/pay',
+      name: 'orderPay',
+      component: OrderPay,
+      meta: {
+        auth: true,
+        keep: false
+      }
+    }, {
+      path: '/order/pay/success',
+      name: 'orderPaySuccess',
+      component: OrderPaySuccess,
+      meta: {
+        auth: true,
+        keep: false
+      }
+    }, {
+      path: '/order/pay/fail',
+      name: 'orderPayFail',
+      component: OrderPayFail,
+      meta: {
+        auth: true,
+        keep: false
+      }
+    }, {
+      path: '/order/return',
+      name: 'orderReturn',
+      component: OrderReturn,
+      meta: {
+        auth: true,
+        keep: false
+      }
+    }, {
+      path: '/login',
+      name: 'login',
+      component: Login,
+      meta: {
+        auth: false
+      }
+    }, {
+      path: '/key',
+      name: 'key',
+      component: Key,
+      meta: {
+        auth: false
+      }
+    }, {
+      path: '/search',
+      name: 'search',
+      component: Search,
+      meta: {
+        auth: true,
+        keep: true
+      }
+    }, {
+      path: '/brandStreet',
+      name: 'brandStreet',
+      component: BrandStreet,
+      meta: {
+        auth: true,
+        keep: true
+      }
+    }, {
+      path: '*',
+      redirect: {
+        name: 'home'
+      }
+    }
+  ]
 })
 
 //登录验证
 router.beforeEach((to, from, next) => {
-	if(to.meta.auth) {//是否需要验证
-		if(window.localStorage.access_token) {//有没有token
-			next()
-		} else {
-			next({
-				name: 'login',
-				query: {
-					redirect: to.fullPath
-				}
-			})
-		}
-	} else {
-		next()
-	}
+  //需要验证且没有token，跳转到登陆页面
+  if (to.meta.auth && !window.localStorage.access_token) {
+    next({
+      name: 'login',
+      query: {
+        redirect: to.fullPath
+      }
+    })
+  }
+  next()
 })
 
 export default router
