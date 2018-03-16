@@ -173,7 +173,7 @@ export default {
 			}
 
 			//获取个人信息
-			window.localStorage.user_info = JSON.stringify(res.data)
+			window.localStorage.user_info = JSON.stringify(res.data.info)
 			setTimeout(() => {
 				//有重定向地址则跳转重定向地址
 				if (this.$route.query.redirect != undefined) {

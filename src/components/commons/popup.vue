@@ -54,13 +54,13 @@
 		justify-content: center;
 		align-items: center;
 	}
-	
+
 	.popup {
 		display: flex;
 		flex-direction: column;
 		background: white;
 		padding: 0 1.5rem;
-		min-width: 60vw;
+		min-width: 70vw;
 		.title {
 			font-size: 1.6rem;
 			height: 10vw;

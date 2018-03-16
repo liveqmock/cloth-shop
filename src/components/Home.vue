@@ -69,7 +69,7 @@ export default {
 		}
 	},
 	//如果没有商品信息，向远程服务器请求数据
-	async created() {
+	async activated() {
 		if (this.goods.length == 0) {
 			let res = await this.$http({
 				url: this.$store.state.domain + '/index/index',

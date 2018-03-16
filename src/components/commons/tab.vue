@@ -54,7 +54,7 @@ export default {
         align-items: center;
         color: #c1c1c1;
         & > i {
-            font-size: 2.4rem;
+            font-size: 2.2rem;
             margin-bottom: 0.1rem;
         }
         & > span {

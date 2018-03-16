@@ -89,7 +89,7 @@
 				sex: '1',//1是男，2是女
 				phone: '',//手机
 				code: '',//验证码
-				code_time: 60,//验证码倒计时 
+				code_time: 60,//验证码倒计时
 				code_flag: true,//切换验证码状态
 				interval: '',//验证码定时器
 			}
@@ -287,20 +287,22 @@
 			border-bottom: 1px solid #F3F3F3;
 		}
 	}
-	
+
 	.btn-group {
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
+		padding: 2rem 0;
 		&>span {
-			border: 1px solid #999999!important;
+			border: 1px solid #e2e2e2!important;
 			display: flex;
 			justify-content: center;
 			align-content: center;
 			flex: 0 0 auto!important;
-			padding: 0.4rem 2rem;
-			border-radius: 1rem;
+			padding: 0.4rem 3rem;
+			border-radius: 0.5rem;
 			color: #999999;
+			font-size: 14px
 		}
 		.btn-active {
 			border: 1px solid #FF5555!important;
@@ -308,17 +310,20 @@
 			background: #FF5555;
 		}
 	}
-	
+
 	.nickname {
+		border: 1px solid #e2e2e2;
 		text-align: center;
 		font-size: 1.6rem;
+		padding: 1rem 0;
+		margin: 2rem 0;
 	}
-	
+
 	.my-setting {
 		background: #F3F3F3;
 		min-height: 100vh;
 	}
-	
+
 	.list-item {
 		background: white;
 		border-bottom: 1px solid #F3F3F3;
