@@ -195,10 +195,12 @@ export default {
 			return o;
 		})
 		//address
-		res.data.address.forEach(a => a.check = false)
-		res.data.address[0].check = true
-		this.address = [...res.data.address]
-		this.address_s = res.data.address[0]
+		if (res.data.address.length > 0) {
+			res.data.address.forEach(a => a.check = false)
+			res.data.address[0].check = true
+			this.address = [...res.data.address]
+			this.address_s = res.data.address[0]
+		}
 
 		// coupon
 		// let arr1 = []
@@ -307,19 +309,19 @@ export default {
 }
 
 .remark {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
     margin-bottom: 0.8rem;
-	padding: 0 1.4rem;
+    padding: 0 1.4rem;
     background: white;
-	font-size: 1.4rem;
-	line-height: 3rem;
+    font-size: 1.4rem;
+    line-height: 3rem;
     & > input {
-		flex: 1 1 auto;
+        flex: 1 1 auto;
         height: 3rem;
         padding: 0.6rem 1.4rem;
         font-size: 1.4rem;
-		box-sizing: border-box;
+        box-sizing: border-box;
     }
 }
 
@@ -394,7 +396,7 @@ export default {
         font-size: 1.6rem;
         border-bottom: 1px solid #F3F3F3;
         & > img {
-			flex: 0 0 auto;
+            flex: 0 0 auto;
             height: 10rem;
             width: 10rem;
             margin-right: 1rem;
@@ -492,7 +494,7 @@ export default {
         border-radius: 0;
         height: 12vw;
         font-size: 1.6rem;
-		padding: 0;
+        padding: 0;
     }
 }
 </style>

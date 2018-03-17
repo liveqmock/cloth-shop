@@ -7,12 +7,15 @@ let goodsList = [{
   sale_count: '@integer(1,999)',
   is_new: '@integer(0,1)',
   number: '@integer(1,99)',
+  count: '@integer(1,99)',
+  goods_id: '@id',
+  check: false,
   thumb_200: '/static/goods/goods (@integer(1,18)).jpg',
   avatar: '/static/goods/goods (@integer(1,18)).jpg',
   'goods_attr_arr|1-3': [{
     attr_value: '@ctitle(2,4)',
     attr_name: '@ctitle(2,4)',
-  }]
+  }],
 }]
 //品牌
 let brandList = [{
@@ -180,20 +183,140 @@ Mock.mock(/\/order\/preview/, {
     'goods|1-3': goodsList,
   }],
   'address|0-5': [{
-      consignee:'@cname(2,4)',
-      tel: /((188)|(133)|(156))\d{8}/,
-      province_zh: '@province',
-      city_zh: '@city',
-      district_zh: '@county',
-      address: '@ctitle(5,15)',
+    consignee: '@cname(2,4)',
+    tel: /((188)|(133)|(156))\d{8}/,
+    province_zh: '@province',
+    city_zh: '@city',
+    district_zh: '@county',
+    address: '@ctitle(5,15)',
   }]
 })
-Mock.mock(/\/order\/submit/,{
-    code:200,
-    trade_no:/\w{5}\d{20}/,
-    goods_total:'@integer(99,99999)',
-    number_total:'@integer(1,99)',
-    msg:'@ctitle(2,4)',
+//提交订单
+Mock.mock(/\/order\/submit/, {
+  code: 200,
+  trade_no: /\w{5}\d{20}/,
+  goods_total: '@integer(99,99999)',
+  number_total: '@integer(1,99)',
+  msg: '@ctitle(2,4)',
 })
-
+//获取购物车
+Mock.mock(/\/user\/cart/, {
+  code: 200,
+  'goods|1-3': [{
+    avatar: '/static/brand/brand (@integer(1,8)).png',
+    name: '@ctitle(2,4)',
+    'goods|1-3': goodsList,
+  }],
+})
+//商品移出购物车
+Mock.mock(/\/user\/remove_cart/, {
+  code: /(200)|(400)/,
+  msg: '@ctitle(2,4)',
+})
+//添加收货地址
+Mock.mock(/\/user\/add_address/, {
+  code: /(200)|(400)/,
+  msg: '@ctitle(2,4)',
+  address: {
+    id: '@id',
+    consignee: '@cname(2,4)',
+    tel: /((188)|(133)|(156))\d{8}/,
+    province_zh: '@province',
+    city_zh: '@city',
+    district_zh: '@county',
+    address: '@ctitle(5,15)',
+  }
+})
+//获取省市区
+Mock.mock(/\/api\/get_area/, {
+  code: /(200)/,
+  'area|2-34': [{
+    region_name: '@province',
+    region_type: '@integer(1,3)'
+  }],
+})
+//获取代理数据
+Mock.mock(/\/agency\/index/, {
+  code: /(200)/,
+  msg: '@ctitle(2,4)',
+  agency_info: {
+    type: /(金牌代理)/,
+    money: '@integer(99,9999)',
+    order: {
+      total: '@integer(99,9999)',
+      count: '@integer(1,99)'
+    }
+  },
+})
+//获取代理数据
+Mock.mock(/\/agency\/apply/, {
+  code: /(200)/,
+  msg: '@ctitle(2,4)',
+  trade_no: /\w{5}\d{20}/,
+})
+//获取二维码
+Mock.mock(/\/user\/promotion/, {
+  code: /(200)/,
+  msg: '@ctitle(2,4)',
+  image: '/static/qrcode.png',
+})
+//我的团队
+Mock.mock(/\/agency\/team/, {
+  code: /(200)/,
+  msg: '@ctitle(2,4)',
+  'team|2-20': [{
+    avatar: '/static/headlike/headlike (@integer(1,2)).png',
+    nickname: '@cname(2,5)',
+    count: '@integer(2,20)',
+    commission: '@integer(99,99999)',
+    phone: /((188)|(133)|(156))\d{8}/
+  }],
+})
+//申请提现
+Mock.mock(/\/agency\/withdraw/, {
+  code: /(200)|(400)/,
+  msg: '@ctitle(2,4)',
+})
+//移出收藏
+Mock.mock(/\/user\/remove_store/, {
+  code: /(200)|(400)/,
+  msg: '@ctitle(2,4)',
+})
+//申请入驻
+Mock.mock(/\/user\/enter/, {
+  code: /(200)|(400)/,
+  msg: '@ctitle(2,4)',
+})
+//设置默认地址
+Mock.mock(/\/user\/set_default/, {
+  code: /(200)|(400)/,
+  msg: '@ctitle(2,4)',
+})
+//移出地址
+Mock.mock(/\/user\/remove_address/, {
+  code: /(200)|(400)/,
+  msg: '@ctitle(2,4)',
+})
+//地址列表
+Mock.mock(/\/user\/address/, {
+  code: /(200)/,
+  msg: '@ctitle(2,4)',
+  'address|4-10': [{
+    id: '@id',
+    consignee: '@cname(2,4)',
+    tel: /((188)|(133)|(156))\d{8}/,
+    province_zh: '@province',
+    city_zh: '@city',
+    district_zh: '@county',
+    address: '@ctitle(5,15)',
+  }]
+})
+//我的收藏
+Mock.mock(/\/user\/store/, {
+  code: /(200)/,
+  msg: '@ctitle(2,4)',
+  'goods|10-20': goodsList,
+  total_count: '@integer(20,40)',
+  promotion_count: '@integer(10,20)',
+})
 export default Mock

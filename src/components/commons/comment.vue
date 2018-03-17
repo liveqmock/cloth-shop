@@ -20,7 +20,7 @@
 					{{item.content}}
 				</div>
 				<div class="comment-img">
-					<img @click="view(item.proof_arr)" v-for="img in item.thumb_arr" :src="$store.state.domain+img" />
+					<img @click="view(item.thumb_arr)" v-for="img in item.thumb_arr" :src="$store.state.domain+img" />
 				</div>
 			</div>
 		</template>
