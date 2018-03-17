@@ -23,11 +23,20 @@
 	}
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 	@import './style/common.css'; //重置样式表
 	@import './style/animate.min.css';//动画库
 	@import './style/iconfont.css';//图标库
 	#app {
 		position: relative;
+	}
+	.btn{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: #ff5555;
+		color:#ffffff;
+		font-size: 1.6rem;
+		padding: 0.6rem 1rem;
 	}
 </style>

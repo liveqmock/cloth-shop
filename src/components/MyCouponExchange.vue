@@ -52,7 +52,7 @@
 		min-height: 100vh;
 		background: #F3F3F3;
 	}
-	
+
 	.code {
 		background: white;
 		text-align: center;
@@ -62,10 +62,16 @@
 		font-size: 2rem;
 		color: #999999;
 	}
-	
+
 	.exchange {
 		margin: 0 5vw;
 		width: 90vw;
 		height: 4.4rem;
+		font-size: 1.8rem;
+		background: #ff5555;
+		color: white;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 </style>
