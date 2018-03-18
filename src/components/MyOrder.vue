@@ -41,7 +41,7 @@
 					<div v-for="(good,i) in item.goods"
 					     :key="i"
 					     class="order-goods">
-						<img v-view="$store.state.domain+good.thumb_200" />
+						<img :src="$store.state.domain+good.thumb_200" />
 						<div class="goods-info">
 							<p class="goods-title">{{good.goods_name}}</p>
 							<p class="goods-attr">
@@ -53,7 +53,7 @@
 								<span>{{good.goods_num}}件</span>
 								<span>￥{{good.goods_price}}</span>
 								<!-- 商品操作列表 -->
-								<div v-if="item.button_status=='3'||item.button_status=='4'">
+								<!-- <div v-if="item.button_status=='3'||item.button_status=='4'">
 									<span @click.stop="returnGood(good)"
 									      v-if="good.apply_status=='0'"
 									      class="btn goods-btn">退换货</span>
@@ -71,10 +71,9 @@
 									<span @click.stop=""
 									      class="btn goods-btn"
 									      v-else>已评价</span>
-								</div>
+								</div> -->
 							</p>
 						</div>
-						<div></div>
 					</div>
 
 					<!--订单操作按钮-->
@@ -362,6 +361,7 @@ export default {
 .order-list {
     background: #F3F3F3;
     font-size: 1.4rem;
+	padding-top: 1rem;
     .order-cell {
         background: white;
         margin-bottom: 1rem;
@@ -403,10 +403,11 @@ export default {
             display: flex;
             justify-content: space-between;
             align-items: center;
+			border-bottom: 1px solid #e2e2e2;
         }
         .order-goods {
             display: flex;
-            margin-bottom: 1rem;
+            margin-top: 1rem;
             & > img {
                 flex: 0 0 10rem;
                 height: 10rem;
@@ -420,10 +421,18 @@ export default {
                 justify-content: space-between;
                 .goods-title {
                     font-size: 1.6rem;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					display: -webkit-box;
+					-webkit-line-clamp: 2;
+					-webkit-box-orient: vertical;
                 }
                 .goods-attr {
-                    display: flex;
-                    flex-wrap: wrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					display: -webkit-box;
+					-webkit-line-clamp: 1;
+					-webkit-box-orient: vertical;
                     color: #999999;
                     & > span {
                         margin-right: 1rem;

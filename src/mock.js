@@ -2,6 +2,11 @@ let Mock = require('mockjs');
 //商品
 let goodsList = [{
   title: '@ctitle(20,30)',
+  goods_name: '@ctitle(20,30)',
+  goods_num: '@integer(1,99)',
+  apply_status: '@integer(0,1)',
+  goods_status: '@integer(0,1)',
+  goods_price: '@integer(1,999)',
   final_price: '@integer(1,4999)',
   market_price: '@integer(5000,9999)',
   sale_count: '@integer(1,999)',
@@ -37,6 +42,35 @@ let coupon = [{
   coupon_name: '@ctitle(2,4)',
   start_time_format: '@date("yyyy-yy-y")',
   end_time_format: '@date("yyyy-yy-y")',
+}]
+//地址
+let address = [{
+  id: '@id',
+  consignee: '@cname(2,4)',
+  tel: /((188)|(133)|(156))\d{8}/,
+  province_zh: '@province',
+  city_zh: '@city',
+  district_zh: '@county',
+  address: '@ctitle(5,15)',
+}]
+//订单
+let order = [{
+  id: '@id',
+  add_time: '@date("yyyy-yy-y") @time',
+  update_time: '@date("yyyy-yy-y") @time',
+  order_status_zh: /(待付款)|(待发货)|(待收货)|(待评价)|(已取消)|(已完成)/,
+  'goods|1-3': goodsList,
+  pay_fee: '@integer(1,99999)',
+  button_status: '@integer(0,5)',
+  delivery_name:'@cname(4)',
+  shipping_no:/\w{5}\d{10}/,
+  order_no:/\w{5}\d{10}/,
+  phone:/((188)|(133)|(156))\d{8}/,
+  consignee:'@cname(2,4)',
+  detail:'@county(true) @ctitle(4,20)',
+  avatar:'/static/brand/brand (@integer(1,8)).png',
+  name:'@ctitle(2,4)',
+  button_status:'@integer(1,5)',
 }]
 //登陆
 Mock.mock(/\/user\/login/, {
@@ -182,14 +216,7 @@ Mock.mock(/\/order\/preview/, {
     brand: '@ctitle(2,4)',
     'goods|1-3': goodsList,
   }],
-  'address|0-5': [{
-    consignee: '@cname(2,4)',
-    tel: /((188)|(133)|(156))\d{8}/,
-    province_zh: '@province',
-    city_zh: '@city',
-    district_zh: '@county',
-    address: '@ctitle(5,15)',
-  }]
+  'address|0-5': address
 })
 //提交订单
 Mock.mock(/\/order\/submit/, {
@@ -217,15 +244,7 @@ Mock.mock(/\/user\/remove_cart/, {
 Mock.mock(/\/user\/add_address/, {
   code: /(200)|(400)/,
   msg: '@ctitle(2,4)',
-  address: {
-    id: '@id',
-    consignee: '@cname(2,4)',
-    tel: /((188)|(133)|(156))\d{8}/,
-    province_zh: '@province',
-    city_zh: '@city',
-    district_zh: '@county',
-    address: '@ctitle(5,15)',
-  }
+  address: address[0]
 })
 //获取省市区
 Mock.mock(/\/api\/get_area/, {
@@ -301,15 +320,7 @@ Mock.mock(/\/user\/remove_address/, {
 Mock.mock(/\/user\/address/, {
   code: /(200)/,
   msg: '@ctitle(2,4)',
-  'address|4-10': [{
-    id: '@id',
-    consignee: '@cname(2,4)',
-    tel: /((188)|(133)|(156))\d{8}/,
-    province_zh: '@province',
-    city_zh: '@city',
-    district_zh: '@county',
-    address: '@ctitle(5,15)',
-  }]
+  'address|4-10': address
 })
 //我的收藏
 Mock.mock(/\/user\/store/, {
@@ -319,4 +330,43 @@ Mock.mock(/\/user\/store/, {
   total_count: '@integer(20,40)',
   promotion_count: '@integer(10,20)',
 })
+//我的订单
+Mock.mock(/\/user\/order/, {
+  code: /(200)/,
+  msg: '@ctitle(2,4)',
+  'order|10-20': order,
+})
+//我的订单详情
+Mock.mock(/\/order\/detail/, {
+  code: /(200)/,
+  msg: '@ctitle(2,4)',
+  order: order[0],
+  service_tel:/((188)|(133)|(156))\d{8}/,
+  'goods|1-3':goodsList,
+})
+//确认订单
+Mock.mock(/\/order\/confirm/, {
+  code: /(200)/,
+  msg: '@ctitle(2,4)',
+})
+//支付订单
+Mock.mock(/\/order\/verify/, {
+  code: /(200)/,
+  msg: '@ctitle(2,4)',
+  trade_no:/\w{5}\d{10}/,
+})
+//我的订单
+Mock.mock(/\/order\/delivery/, {
+  code: /(200)/,
+  msg: '@ctitle(2,4)',
+  'goods|1-9':goodsList,
+  order:order[0],
+  'delivery|1-5':[{
+      context:'@csentence',
+      ctime:'@date("yyyy-yy-y") @time("HH:mm:ss")',
+  }],
+  count:'@integer(1,99)',
+})
+
+
 export default Mock
