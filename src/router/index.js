@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+//index组
 const Home = r => require.ensure([], () => r(require('@/components/Home')), 'index')
 const Single = r => require.ensure([], () => r(require('@/components/Single')), 'index')
 const ShopCar = r => require.ensure([], () => r(require('@/components/ShopCar')), 'index')
@@ -7,6 +9,7 @@ const Me = r => require.ensure([], () => r(require('@/components/Me')), 'index')
 const Login = r => require.ensure([], () => r(require('@/components/Login')), 'index')
 const Key = r => require.ensure([], () => r(require('@/components/Key')), 'index')
 
+//个人中心组
 const MyBrand = r => require.ensure([], () => r(require('@/components/MyBrand')), 'my')
 const MyBalance = r => require.ensure([], () => r(require('@/components/MyBalance')), 'my')
 const MyCoupon = r => require.ensure([], () => r(require('@/components/MyCoupon')), 'my')
@@ -24,6 +27,7 @@ const MyDistributionStream = r => require.ensure([], () => r(require('@/componen
 const MyDistributionTeam = r => require.ensure([], () => r(require('@/components/MyDistributionTeam')), 'my')
 const MyDistributionWithdraw = r => require.ensure([], () => r(require('@/components/MyDistributionWithdraw')), 'my')
 
+//商品组
 const Sort = r => require.ensure([], () => r(require('@/components/Sort')), 'goods')
 const GoodDetail = r => require.ensure([], () => r(require('@/components/GoodDetail')), 'goods')
 const Search = r => require.ensure([], () => r(require('@/components/Search')), 'goods')
